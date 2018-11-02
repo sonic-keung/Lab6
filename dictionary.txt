@@ -1,0 +1,10 @@
+cat - it meows
+dog - it barks
+bird - it chirps
+animal - lots of animals
+hippo - a fat animal
+mouse - is annoying
+honda - civic
+toyota - corolla
+vw - golf r
+f1 - car

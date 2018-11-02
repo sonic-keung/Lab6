@@ -7,8 +7,8 @@ void print_menu();
 
 int main() {
     int selection;
-    Dictionary d = Dictionary("dictionary.txt");
-
+    Dictionary d = Dictionary("../dictionary.txt");
+    std::cout << "Enter a selection" << std::endl;
     // switch case menu
     while (selection != 4) {
         print_menu();
@@ -30,8 +30,8 @@ int main() {
                 std::cout << "Invalid choice, try again" << std::endl;
                 break;
         }
-
     }
+    return 0;
 }
 
 void print_menu() {

@@ -1,8 +1,9 @@
 #include <map>
-#pragma once
+
 class Dictionary {
 private:
-    std::map<std::string, std::string> insertWord;
+    std::map<std::string, std::string> dictionary;
+    std::map<std::string, std::string>::iterator it;
 
 public:
     Dictionary(std::string);

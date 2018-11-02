@@ -15,13 +15,13 @@ Dictionary::Dictionary(std::string fileName) {
         std::string words = word.substr(0, word.find("-") - 1);
         std::string definition = word.substr(word.find("-") + 2);
 
-        insertWord.insert(std::make_pair(words, definition));
+        dictionary.insert(std::make_pair(words, definition));
     }
 }
 
 // print all of the values in the map
 void Dictionary::printAll() {
-    for (auto& elem : insertWord) {
+    for (auto& elem : dictionary) {
         std::cout << elem.first << " - " << elem.second << std::endl;
     }
 }
@@ -32,51 +32,65 @@ void Dictionary::findWord() {
     std::string findWord;
     std::cin >> findWord;
 
-    std::map<std::string, std::string>::iterator it = insertWord.find(findWord);
+    it = dictionary.find(findWord);
 
     // find word
-    if (it->first != findWord) {
-        std::cout << "can't find word" << std::endl;
+    if (it != dictionary.end()) {
+        std::cout << "Definition: " << it->second << std::endl;
     } else {
-        std::cout << it->second << std::endl;
+        std::cout << "can't find word" << std::endl;
     }
 
 }
 
 // create a new word in the map.
 void Dictionary::newWord() {
-    std::cout << "Enter a new word" << std::endl;
     std::string myWord;
-    std::cin >> myWord;
     std::string wordDef;
 
-    std::map<std::string, std::string>::iterator it = insertWord.find(myWord);
+    std::cout << "Enter a new word" << std::endl;
+    std::cin >> myWord;
+
+    auto itr = dictionary.find(myWord);
+
 
     // add new word to map
-    if (it->first != myWord) {
-        std::cout << "Enter a definition for the entered word" << std::endl;
+    if (itr == dictionary.end()) {
+        std::cout << "Enter a definition for the new word" << std::endl;
         std::cin.ignore();
         getline(std::cin, wordDef);
-        insertWord.insert(make_pair(myWord, wordDef));
+
+        dictionary.insert(make_pair(myWord, wordDef));
+
+        std::ofstream out;
+        out.open("../dictionary.txt", std::ios::app);
+        out << myWord << " - " << wordDef << std::endl;
+
         std::cout << "Word has been added" << std::endl;
     }
 
-    // if word exists in the map already
-    while (it->first == myWord) {
-        std::cout << "Word already exists" << std::endl;
+    while (itr != dictionary.end()) {
+        std::cout << "the word already exists" << std::endl;
         std::cout << "Enter another word" << std::endl;
         std::cin >> myWord;
+        auto itr2 = dictionary.find(myWord);
 
-        if (it->first != myWord) {
-            std::cout << "Enter a definition for the entered word" << std::endl;
+        if (itr2 == dictionary.end()) {
+            std::cout << "Enter a definition for the new word" << std::endl;
             std::cin.ignore();
             getline(std::cin, wordDef);
-            insertWord.insert(make_pair(myWord, wordDef));
+
+            dictionary.insert(make_pair(myWord, wordDef));
+
+            std::ofstream out;
+            out.open("../dictionary.txt", std::ios::app);
+            out << myWord << " - " << wordDef << std::endl;
+
             std::cout << "Word has been added" << std::endl;
             break;
         }
     }
-
 }
+
 
 
