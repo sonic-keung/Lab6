@@ -52,12 +52,13 @@ void Dictionary::newWord() {
 
     std::map<std::string, std::string>::iterator it = insertWord.find(myWord);
 
-    // add new word
+    // add new word to map
     if (it->first != myWord) {
         std::cout << "Enter a definition for the entered word" << std::endl;
         std::cin.ignore();
         getline(std::cin, wordDef);
         insertWord.insert(make_pair(myWord, wordDef));
+        std::cout << "Word has been added" << std::endl;
     }
 
     // if word exists in the map already
@@ -71,6 +72,7 @@ void Dictionary::newWord() {
             std::cin.ignore();
             getline(std::cin, wordDef);
             insertWord.insert(make_pair(myWord, wordDef));
+            std::cout << "Word has been added" << std::endl;
             break;
         }
     }
